@@ -9,10 +9,8 @@ export default function () {
     let checkResult = check(res, {
         'response code was 200': (res) => res.status == 200,
         'remote port was 443': (res) => res.remote_port === 443,
-        'dummy check' : ()=> 'a' === 'a'
+        'time' : (res)=> res.timings.connecting < 100,
+        'header': (res)=> res.request.headers['User-Agent'][0].includes("k6")
     });
     console.log("Check Result " + checkResult)
 }
-
-
-
